@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b209304cdec6741041fe0fdd2b427660",
+    "content-hash": "20500f66ed2d92a825dcbc23de13f674",
     "packages": [
         {
             "name": "brick/math",
@@ -6116,6 +6116,80 @@
                 }
             ],
             "time": "2025-08-08T12:00:00+00:00"
+        },
+        {
+            "name": "gonetone/laravel-boost-windsurf-extension",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GoneTone/laravel-boost-windsurf-extension.git",
+                "reference": "dd65720267a7158d9fa35b562e46694e27b5a0f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GoneTone/laravel-boost-windsurf-extension/zipball/dd65720267a7158d9fa35b562e46694e27b5a0f8",
+                "reference": "dd65720267a7158d9fa35b562e46694e27b5a0f8",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^10.49.0|^11.45.3|^12.28.1",
+                "laravel/boost": "^1.4",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "laravel/pint": "1.20"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "GoneTone\\LaravelBoostWindsurf\\WindsurfServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GoneTone\\LaravelBoostWindsurf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "GoneTone",
+                    "homepage": "https://github.com/GoneTone"
+                }
+            ],
+            "description": "Laravel Boost extension package that provides Windsurf editor and Windsurf JetBrains plugin integration.",
+            "keywords": [
+                "ai",
+                "boost",
+                "dev",
+                "development",
+                "editor",
+                "ide",
+                "jetbrains",
+                "laravel",
+                "phpstorm",
+                "windsurf"
+            ],
+            "support": {
+                "issues": "https://github.com/GoneTone/laravel-boost-windsurf-extension/issues",
+                "source": "https://github.com/GoneTone/laravel-boost-windsurf-extension"
+            },
+            "funding": [
+                {
+                    "url": "https://donate.reh.tw/",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://paypal.me/GoneTone",
+                    "type": "custom"
+                }
+            ],
+            "time": "2025-10-19T10:57:54+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",

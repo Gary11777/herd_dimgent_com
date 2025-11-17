@@ -1,9 +1,10 @@
 {
     "agents": [
-        "claude_code"
+        "windsurf"
     ],
     "editors": [
-        "cursor"
+        "windsurf"
     ],
-    "guidelines": []
+    "guidelines": [],
+    "herd_mcp": true
 }
