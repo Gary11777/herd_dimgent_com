@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+    <title>@yield('title', 'Dimgent Technologies') - Electronics Development</title>
+    <meta name="description" content="@yield('meta_description', 'Dimgent Technologies - Custom electronic device development. From concept to finished product.')">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800" rel="stylesheet" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    
+    <!-- Styles & Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="font-sans antialiased bg-slate-50 text-slate-800">
+    <!-- Navigation -->
+    <nav x-data="{ mobileMenuOpen: false, scrolled: false }" 
+         x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 20 })"
+         :class="{ 'bg-white/95 backdrop-blur-md shadow-md': scrolled, 'bg-white': !scrolled }"
+         class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="{{ route('home') }}" class="flex items-center gap-3 group">
+                    {{-- <img src="{{ asset('images/logo.png') }}" alt="Dimgent Technologies" class="h-12 w-auto transition-transform group-hover:scale-105"> --}}
+                    <div class="hidden sm:block">
+                        <span class="block text-lg font-bold text-slate-900 leading-tight">Dimgent Technologies</span>
+                        <span class="block text-xs text-primary-600 font-medium tracking-wide uppercase">Electronics Development</span>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center gap-1">
+                    @php
+                        $navItems = [
+                            ['route' => 'home', 'label' => 'Home'],
+                            ['route' => 'products', 'label' => 'Products'],
+                            ['route' => 'services', 'label' => 'Services'],
+                            ['route' => 'projects', 'label' => 'Projects'],
+                            ['route' => 'about', 'label' => 'About'],
+                            ['route' => 'contacts', 'label' => 'Contacts'],
+                        ];
+                    @endphp
+                    
+                    @foreach($navItems as $item)
+                        <a href="{{ route($item['route']) }}" 
+                           class="px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200
+                                  {{ request()->routeIs($item['route']) 
+                                     ? 'text-primary-700 bg-primary-50' 
+                                     : 'text-slate-600 hover:text-primary-600 hover:bg-slate-100' }}">
+                            {{ $item['label'] }}
+                        </a>
+                    @endforeach
+                    
+                    <a href="{{ route('contacts') }}" 
+                       class="ml-4 px-5 py-2.5 bg-primary-600 text-white text-sm font-semibold rounded-lg
+                              shadow-md shadow-primary-600/25 hover:bg-primary-700 hover:shadow-lg 
+                              hover:shadow-primary-600/30 transition-all duration-200">
+                        Get in Touch
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                        class="lg:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+                        :aria-expanded="mobileMenuOpen"
+                        aria-label="Toggle navigation menu">
+                    <svg x-show="!mobileMenuOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    <svg x-show="mobileMenuOpen" x-cloak class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-150"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-4"
+             x-cloak
+             class="lg:hidden bg-white border-t border-slate-100 shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 py-4 space-y-1">
+                @foreach($navItems as $item)
+                    <a href="{{ route($item['route']) }}" 
+                       @click="mobileMenuOpen = false"
+                       class="block px-4 py-3 text-base font-medium rounded-lg transition-colors
+                              {{ request()->routeIs($item['route']) 
+                                 ? 'text-primary-700 bg-primary-50' 
+                                 : 'text-slate-600 hover:text-primary-600 hover:bg-slate-50' }}">
+                        {{ $item['label'] }}
+                    </a>
+                @endforeach
+                
+                <div class="pt-3 mt-3 border-t border-slate-100">
+                    <a href="{{ route('contacts') }}" 
+                       @click="mobileMenuOpen = false"
+                       class="block w-full px-4 py-3 bg-primary-600 text-white text-center font-semibold rounded-lg
+                              shadow-md hover:bg-primary-700 transition-colors">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="pt-20">
+        @yield('content')
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Main Footer -->
+            <div class="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Company Info -->
+                <div class="lg:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="{{ asset('images/logo.png') }}" alt="Dimgent Technologies" class="h-10 w-auto brightness-0 invert opacity-90">
+                        <div>
+                            <span class="block text-lg font-bold text-white">Dimgent Technologies</span>
+                            <span class="block text-sm text-primary-400">Electronics Development</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 leading-relaxed max-w-md mb-6">
+                        A group of specialists with more than 20 years of experience in electronic device development. 
+                        From concept to finished product, we deliver quality solutions.
+                    </p>
+                    <div class="flex items-center gap-2 text-slate-400">
+                        <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <span>Minsk, Belarus</span>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        @foreach(['Home', 'Products', 'Services', 'Projects', 'About', 'Contacts'] as $link)
+                            <li>
+                                <a href="{{ route(strtolower($link)) }}" 
+                                   class="text-slate-400 hover:text-primary-400 transition-colors">
+                                    {{ $link }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="text-white font-semibold mb-6">Our Services</h4>
+                    <ul class="space-y-3 text-slate-400">
+                        <li>Electric Circuit Design</li>
+                        <li>Software Development</li>
+                        <li>PCB Layout Design</li>
+                        <li>Prototyping</li>
+                        <li>Technical Support</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="py-6 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-slate-500">
+                    &copy; {{ date('Y') }} Dimgent Technologies. All rights reserved.
+                </p>
+                <div class="flex items-center gap-6 text-sm text-slate-500">
+                    <span>More than 50 projects completed</span>
+                    <span class="hidden sm:inline">•</span>
+                    <span>20+ years of experience</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Alpine.js cloak style -->
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</body>
+</html>
