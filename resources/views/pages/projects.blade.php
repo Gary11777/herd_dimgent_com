@@ -2,6 +2,8 @@
 
 @section('title', 'Projects')
 @section('meta_description', 'Our portfolio of electronic device development projects including control systems, testing tools, medical devices, and everyday technology.')
+@section('meta_keywords', 'automated meters, developing hardware devices, integral microsystems, developing electronic devices, dimmers, radio extenders, wireless headphones, gradiometers, electroprobes, control panels')
+@section('robots', 'index, follow')
 
 @section('content')
     <!-- Hero Section -->

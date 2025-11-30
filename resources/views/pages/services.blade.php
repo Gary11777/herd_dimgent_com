@@ -2,6 +2,8 @@
 
 @section('title', 'Services')
 @section('meta_description', 'Custom electronic device development services - full cycle development from concept to finished product, or individual phases as required.')
+@section('meta_keywords', 'developing electronic devices, designing circuit boards, developing hardware devices, software, developing customized electronic devices, electric circuits, developing circuit boards, programming microcontrollers')
+@section('robots', 'index, follow')
 
 @section('content')
     <!-- Hero Section -->

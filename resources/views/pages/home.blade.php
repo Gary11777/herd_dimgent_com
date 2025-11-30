@@ -2,6 +2,8 @@
 
 @section('title', 'Home')
 @section('meta_description', 'Dimgent Technologies - Custom electronic device development from concept to finished product. More than 20 years of experience.')
+@section('meta_keywords', 'developing hardware devices, designing circuit boards, developing customized electronic devices, electric circuits, developing electronic equipment')
+@section('robots', 'index, follow')
 
 @section('content')
     <!-- Hero Section -->
@@ -17,7 +19,7 @@
                 <div class="text-center lg:text-left">
                     <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-500/20 rounded-full mb-6">
                         <span class="w-2 h-2 bg-primary-400 rounded-full animate-pulse"></span>
-                        <span class="text-primary-300 text-sm font-medium">Based in Minsk, Belarus</span>
+                        <span class="text-primary-300 text-sm font-medium">Dimgent Technologies</span>
                     </div>
                     
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
@@ -176,19 +178,16 @@
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                 <!-- Product Image -->
                 <div class="relative order-2 lg:order-1">
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                    <div class="relative rounded-2xl overflow-hidden">
                         <img src="{{ asset('images/products/main_photo_of_garand101.jpg') }}" 
                              alt="Garand 101 Magnetometer" 
                              class="w-full h-auto object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent"></div>
                         <div class="absolute bottom-6 left-6 right-6">
                             <span class="inline-block px-3 py-1 bg-primary-600 text-white text-sm font-medium rounded-full">
                                 Featured Product
                             </span>
                         </div>
                     </div>
-                    <!-- Decorative -->
-                    <div class="absolute -z-10 -bottom-6 -right-6 w-full h-full bg-primary-100 rounded-2xl"></div>
                 </div>
                 
                 <!-- Product Info -->
