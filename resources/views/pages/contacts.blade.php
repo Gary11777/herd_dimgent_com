@@ -2,6 +2,8 @@
 
 @section('title', 'Contacts')
 @section('meta_description', 'Contact Dimgent Technologies for electronic device development services. Get in touch with our team in Minsk, Belarus.')
+@section('meta_keywords', 'Dimgent Technologies Contacts')
+@section('robots', 'noindex, nofollow')
 
 @section('content')
     <!-- Hero Section -->
@@ -36,7 +38,7 @@
                     
                     <!-- Contact Cards -->
                     <div class="space-y-6">
-                        <!-- Location -->
+                        {{-- <!-- Location -->
                         <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
                             <div class="flex items-start gap-4">
                                 <div class="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center">
@@ -47,11 +49,11 @@
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-bold text-slate-900 mb-1">Location</h3>
-                                    <p class="text-slate-600">Minsk, Belarus</p>
+                                    <p class="text-slate-600">City, Country</p>
                                     <p class="text-sm text-slate-500 mt-1">Development Center</p>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         
                         <!-- Email -->
                         <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
@@ -63,9 +65,7 @@
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-bold text-slate-900 mb-1">Email</h3>
-                                    <a href="mailto:info@dimgent.com" class="text-primary-600 hover:text-primary-700 font-medium">
-                                        info@dimgent.com
-                                    </a>
+                                    <img src="{{ asset('images/mail_white.png') }}" alt="Email">
                                     <p class="text-sm text-slate-500 mt-1">We reply within 24 hours</p>
                                 </div>
                             </div>

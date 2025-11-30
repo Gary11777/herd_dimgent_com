@@ -2,6 +2,8 @@
 
 @section('title', 'Products')
 @section('meta_description', 'Garand 101 - High-resolution fluxgate magnetometer-gradiometer for archaeological research, environmental monitoring, and geological studies.')
+@section('meta_keywords', 'Garand 101, fluxgate magnetometer-gradiometer, archaeological research, environmental monitoring, geological studies')
+@section('robots', 'index, follow')
 
 @section('content')
     <!-- Hero Section -->
@@ -31,12 +33,12 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
                 <!-- Product Gallery -->
-                <div x-data="{ activeImage: '{{ asset('images/products/main_photo_of_garand101.jpg') }}' }" class="sticky top-28">
+                <div x-data="{ activeImage: '{{ asset('images/products/main_photo_of_garand101.jpg') }}' }" class="lg:sticky lg:top-28">
                     <!-- Main Image -->
                     <div class="relative rounded-2xl overflow-hidden shadow-2xl mb-6 bg-slate-100">
                         <img :src="activeImage" 
                              alt="Garand 101 Magnetometer" 
-                             class="w-full h-auto object-cover aspect-[4/3]">
+                             class="w-full h-auto object-contain">
                     </div>
                     
                     <!-- Thumbnail Gallery -->

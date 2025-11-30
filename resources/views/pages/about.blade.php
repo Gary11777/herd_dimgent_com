@@ -2,6 +2,8 @@
 
 @section('title', 'About Us')
 @section('meta_description', 'Dimgent Technologies - A group of specialists with 20+ years of experience in electronic device development, based in Minsk, Belarus.')
+@section('meta_keywords', 'Dimgent Technologies, developing electronic devices, designing printed circuit boards, developing hardware devices, microcontrollers, embedded systems, microprocessors, analog electronics, digital electronics, logical systems, developing telemechanical equipment, programmable logical matrices, infra-red channels, telemetry, radio channels, remote control, analog to digital converter, tools to monitor electrical circuit signals, ferroprobe to measure magnetic field, gradiometer, electronic soil probes, robotics')
+@section('robots', 'index, follow')
 
 @section('content')
     <!-- Hero Section -->
@@ -18,16 +20,15 @@
                 Dimgent Technologies
             </h1>
             <p class="text-xl text-slate-300 max-w-3xl mx-auto mb-8">
-                A group of specialists working in the development of electronic devices, 
-                based in Minsk, Belarus.
+                A group of specialists working in the development of electronic devices.
             </p>
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
+            {{-- <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
                 <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                 </svg>
-                <span class="text-white font-medium">Development Center: Minsk, Belarus</span>
-            </div>
+                <span class="text-white font-medium">Development Center: City, Country</span>
+            </div> --}}
         </div>
     </section>
     

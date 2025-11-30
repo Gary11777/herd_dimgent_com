@@ -7,13 +7,28 @@
     
     <title>@yield('title', 'Dimgent Technologies') - Electronics Development</title>
     <meta name="description" content="@yield('meta_description', 'Dimgent Technologies - Custom electronic device development. From concept to finished product.')">
-    
+    <meta name="keywords" content="@yield('meta_keywords', 'Dimgent Technologies, electronics development, custom electronic device development')">
+    <meta name="googlebot" content="index, follow" />
+    <meta name="robots" content="@yield('robots', 'index, follow')" />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800" rel="stylesheet" />
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" type="image/ico" href="{{ asset('images/favicon.ico') }}">
+    
+    <!-- Start Google analitics code -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-77722463-1', 'auto');
+    ga('send', 'pageview');
+
+    </script>
+    <!-- End Google analitics code -->
     
     <!-- Styles & Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -30,7 +45,7 @@
                 <a href="{{ route('home') }}" class="flex items-center gap-3 group">
                     {{-- <img src="{{ asset('images/logo.png') }}" alt="Dimgent Technologies" class="h-12 w-auto transition-transform group-hover:scale-105"> --}}
                     <div class="hidden sm:block">
-                        <span class="block text-lg font-bold text-slate-900 leading-tight">Dimgent Technologies</span>
+                        <span class="block text-lg font-bold text-slate-900 leading-tight">&#47;&#47; Dimgent Technologies</span>
                         <span class="block text-xs text-primary-600 font-medium tracking-wide uppercase">Electronics Development</span>
                     </div>
                 </a>
@@ -52,18 +67,11 @@
                         <a href="{{ route($item['route']) }}" 
                            class="px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200
                                   {{ request()->routeIs($item['route']) 
-                                     ? 'text-primary-700 bg-primary-50' 
-                                     : 'text-slate-600 hover:text-primary-600 hover:bg-slate-100' }}">
+                                     ? 'text-primary-700 bg-primary-50 text-center' 
+                                     : 'text-slate-600 hover:text-primary-600 hover:bg-slate-100 text-center' }}">
                             {{ $item['label'] }}
                         </a>
                     @endforeach
-                    
-                    <a href="{{ route('contacts') }}" 
-                       class="ml-4 px-5 py-2.5 bg-primary-600 text-white text-sm font-semibold rounded-lg
-                              shadow-md shadow-primary-600/25 hover:bg-primary-700 hover:shadow-lg 
-                              hover:shadow-primary-600/30 transition-all duration-200">
-                        Get in Touch
-                    </a>
                 </div>
                 
                 <!-- Mobile Menu Button -->
@@ -97,20 +105,11 @@
                        @click="mobileMenuOpen = false"
                        class="block px-4 py-3 text-base font-medium rounded-lg transition-colors
                               {{ request()->routeIs($item['route']) 
-                                 ? 'text-primary-700 bg-primary-50' 
-                                 : 'text-slate-600 hover:text-primary-600 hover:bg-slate-50' }}">
+                                 ? 'text-primary-700 bg-primary-50 text-center' 
+                                 : 'text-slate-600 hover:text-primary-600 hover:bg-slate-50 text-center' }}">
                         {{ $item['label'] }}
                     </a>
                 @endforeach
-                
-                <div class="pt-3 mt-3 border-t border-slate-100">
-                    <a href="{{ route('contacts') }}" 
-                       @click="mobileMenuOpen = false"
-                       class="block w-full px-4 py-3 bg-primary-600 text-white text-center font-semibold rounded-lg
-                              shadow-md hover:bg-primary-700 transition-colors">
-                        Get in Touch
-                    </a>
-                </div>
             </div>
         </div>
     </nav>
@@ -128,7 +127,7 @@
                 <!-- Company Info -->
                 <div class="lg:col-span-2">
                     <div class="flex items-center gap-3 mb-6">
-                        <img src="{{ asset('images/logo.png') }}" alt="Dimgent Technologies" class="h-10 w-auto brightness-0 invert opacity-90">
+                        {{-- <img src="{{ asset('images/logo.png') }}" alt="Dimgent Technologies" class="h-10 w-auto brightness-0 invert opacity-90"> --}}
                         <div>
                             <span class="block text-lg font-bold text-white">Dimgent Technologies</span>
                             <span class="block text-sm text-primary-400">Electronics Development</span>
@@ -143,7 +142,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
-                        <span>Minsk, Belarus</span>
+                        <span>Dimgent Technologies</span>
                     </div>
                 </div>
                 
@@ -178,7 +177,10 @@
             <!-- Bottom Bar -->
             <div class="py-6 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
                 <p class="text-sm text-slate-500">
-                    &copy; {{ date('Y') }} Dimgent Technologies. All rights reserved.
+                    &copy; {{ date('Y') }} &#47;&#47; Dimgent Technologies. All rights reserved.
+                </p>
+                <p class="text-sm text-slate-500">
+                    Website design by <a href="https://sitestar.by/" target="_blank" rel="noopener" class="text-gray-300 text-lg underline hover:text-primary-400 hover:no-underline transition-colors">Sitestar</a>
                 </p>
                 <div class="flex items-center gap-6 text-sm text-slate-500">
                     <span>More than 50 projects completed</span>
