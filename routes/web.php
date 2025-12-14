@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 // Home
@@ -31,3 +32,7 @@ Route::get('/about', function () {
 Route::get('/contacts', function () {
     return view('pages.contacts');
 })->name('contacts');
+
+Route::post('/contacts', [ContactController::class, 'submit'])
+    ->middleware(['throttle:5,60'])
+    ->name('contacts.submit');

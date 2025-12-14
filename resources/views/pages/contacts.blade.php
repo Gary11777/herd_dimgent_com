@@ -116,13 +116,15 @@
                         <form x-data="{ 
                             formData: { name: '', email: '', company: '', subject: '', message: '' },
                             errors: {},
+                            serverError: '',
                             submitted: false,
                             loading: false,
                             validateEmail(email) {
                                 return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
                             },
-                            submitForm() {
+                            async submitForm() {
                                 this.errors = {};
+                                this.serverError = '';
                                 
                                 if (!this.formData.name.trim()) this.errors.name = 'Name is required';
                                 if (!this.formData.email.trim()) this.errors.email = 'Email is required';
@@ -132,14 +134,60 @@
                                 
                                 if (Object.keys(this.errors).length === 0) {
                                     this.loading = true;
-                                    // Simulate form submission
-                                    setTimeout(() => {
-                                        this.submitted = true;
+                                    
+                                    try {
+                                        const formElement = this.$el;
+                                        const formData = new FormData(formElement);
+                                        
+                                        const response = await fetch('{{ route('contacts.submit') }}', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Accept': 'application/json',
+                                            },
+                                            body: formData
+                                        });
+                                        
+                                        const data = await response.json();
+                                        
+                                        if (response.ok) {
+                                            this.submitted = true;
+                                        } else if (response.status === 422) {
+                                            // Validation errors
+                                            if (data.errors) {
+                                                Object.keys(data.errors).forEach(key => {
+                                                    this.errors[key] = data.errors[key][0];
+                                                });
+                                            }
+                                            // Reset Turnstile on validation error
+                                            if (typeof turnstile !== 'undefined') {
+                                                turnstile.reset();
+                                            }
+                                        } else if (response.status === 429) {
+                                            this.serverError = 'Too many requests. Please try again later.';
+                                        } else {
+                                            this.serverError = data.message || 'An error occurred. Please try again.';
+                                        }
+                                    } catch (error) {
+                                        this.serverError = 'Network error. Please check your connection and try again.';
+                                    } finally {
                                         this.loading = false;
-                                    }, 1000);
+                                    }
                                 }
                             }
                         }" @submit.prevent="submitForm">
+                            
+                            @csrf
+                            <x-honeypot />
+                            
+                            <!-- Server Error Message -->
+                            <div x-show="serverError" x-cloak class="mb-6 p-4 bg-rose-50 border border-rose-200 rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <svg class="w-5 h-5 text-rose-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    <p class="text-rose-700 text-sm" x-text="serverError"></p>
+                                </div>
+                            </div>
                             
                             <!-- Success Message -->
                             <div x-show="submitted" x-cloak class="mb-8 p-6 bg-emerald-50 border border-emerald-200 rounded-2xl">
@@ -165,6 +213,7 @@
                                         </label>
                                         <input type="text" 
                                                id="name" 
+                                               name="name"
                                                x-model="formData.name"
                                                :class="errors.name ? 'border-rose-300 focus:border-rose-500 focus:ring-rose-500' : 'border-slate-200 focus:border-primary-500 focus:ring-primary-500'"
                                                class="w-full px-4 py-3 bg-white border rounded-xl shadow-sm focus:ring-2 focus:ring-offset-0 transition-colors"
@@ -179,6 +228,7 @@
                                         </label>
                                         <input type="email" 
                                                id="email" 
+                                               name="email"
                                                x-model="formData.email"
                                                :class="errors.email ? 'border-rose-300 focus:border-rose-500 focus:ring-rose-500' : 'border-slate-200 focus:border-primary-500 focus:ring-primary-500'"
                                                class="w-full px-4 py-3 bg-white border rounded-xl shadow-sm focus:ring-2 focus:ring-offset-0 transition-colors"
@@ -195,6 +245,7 @@
                                         </label>
                                         <input type="text" 
                                                id="company" 
+                                               name="company"
                                                x-model="formData.company"
                                                class="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl shadow-sm focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-offset-0 transition-colors"
                                                placeholder="Your company (optional)">
@@ -206,6 +257,7 @@
                                             Subject <span class="text-rose-500">*</span>
                                         </label>
                                         <select id="subject" 
+                                                name="subject"
                                                 x-model="formData.subject"
                                                 :class="errors.subject ? 'border-rose-300 focus:border-rose-500 focus:ring-rose-500' : 'border-slate-200 focus:border-primary-500 focus:ring-primary-500'"
                                                 class="w-full px-4 py-3 bg-white border rounded-xl shadow-sm focus:ring-2 focus:ring-offset-0 transition-colors">
@@ -226,12 +278,19 @@
                                         Message <span class="text-rose-500">*</span>
                                     </label>
                                     <textarea id="message" 
+                                              name="message"
                                               rows="5" 
                                               x-model="formData.message"
                                               :class="errors.message ? 'border-rose-300 focus:border-rose-500 focus:ring-rose-500' : 'border-slate-200 focus:border-primary-500 focus:ring-primary-500'"
                                               class="w-full px-4 py-3 bg-white border rounded-xl shadow-sm focus:ring-2 focus:ring-offset-0 transition-colors resize-none"
                                               placeholder="Tell us about your project or inquiry..."></textarea>
                                     <p x-show="errors.message" x-text="errors.message" class="mt-1 text-sm text-rose-600"></p>
+                                </div>
+                                
+                                <!-- Cloudflare Turnstile -->
+                                <div>
+                                    <x-turnstile />
+                                    <p x-show="errors['cf-turnstile-response']" x-text="errors['cf-turnstile-response']" class="mt-1 text-sm text-rose-600"></p>
                                 </div>
                                 
                                 <!-- Submit Button -->
