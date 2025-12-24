@@ -152,7 +152,7 @@
                     </div>
                     
                     <!-- External Link -->
-                    <div class="mt-6 p-4 bg-primary-50 rounded-xl border border-primary-100">
+                    {{-- <div class="mt-6 p-4 bg-primary-50 rounded-xl border border-primary-100">
                         <p class="text-sm text-slate-600">
                             For more detailed information, visit: 
                             <a href="http://www.gradiometr.com" target="_blank" rel="noopener" 
@@ -160,7 +160,7 @@
                                 www.gradiometr.com
                             </a>
                         </p>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
